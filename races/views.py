@@ -1,6 +1,7 @@
 from rest_framework import generics, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.http import JsonResponse
 from django.db.models import Count
 from .models import Race
 from .serializers import RaceSerializer, RaceStatsSerializer
@@ -43,3 +44,21 @@ def race_stats(request):
     
     serializer = RaceStatsSerializer(color_counts)
     return Response(serializer.data)
+
+
+def api_root(request):
+    """Root endpoint - provides API information"""
+    return JsonResponse({
+        'message': 'JScargot API - Snail Race Backend',
+        'version': '1.2.0',
+        'frontend': 'https://kystocks.github.io/snail-race-game/',
+        'endpoints': {
+            'races': '/api/races/',
+            'create_race': '/api/races/create/',
+            'statistics': '/api/stats/',
+        },
+        'github': {
+            'frontend': 'https://github.com/kystocks/snail-race-game',
+            'backend': 'https://github.com/kystocks/snail-race-backend',
+        }
+    })
