@@ -129,13 +129,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS settings - allow your GitHub Pages frontend to call this API
+# CORS settings - allow specific origins
 CORS_ALLOWED_ORIGINS = [
-    "https://kystocks.github.io",  # Your GitHub Pages URL
+    "https://kystocks.github.io",  # Production - GitHub Pages
+    "http://localhost:5173",       # Development - Vite dev server
+    "http://127.0.0.1:5173",       # Development - Vite dev server (alternative)
 ]
-
-# For development - allow all origins
-CORS_ALLOW_ALL_ORIGINS = True  # TODO: Set to False in production
 
 # REST Framework settings
 REST_FRAMEWORK = {
