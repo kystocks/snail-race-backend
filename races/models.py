@@ -1,17 +1,9 @@
 from django.db import models
+from .constants import SNAIL_COLORS
 
 
 class Race(models.Model):
     """Stores the result of a single snail race"""
-    
-    SNAIL_COLORS = [
-        ('red', 'Red'),
-        ('blue', 'Blue'),
-        ('yellow', 'Yellow'),
-        ('green', 'Green'),
-        ('orange', 'Orange'),
-        ('purple', 'Purple'),
-    ]
     
     winner_color = models.CharField(max_length=20, choices=SNAIL_COLORS)
     race_date = models.DateTimeField(auto_now_add=True)

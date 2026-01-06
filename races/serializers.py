@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Race
+from .constants import SNAIL_COLOR_VALUES
 
 
 class RaceSerializer(serializers.ModelSerializer):
@@ -12,10 +13,9 @@ class RaceSerializer(serializers.ModelSerializer):
     
     def validate_winner_color(self, value):
         """Validate that winner_color is one of the valid snail colors"""
-        valid_colors = [color[0] for color in Race.SNAIL_COLORS]
-        if value not in valid_colors:
+        if value not in SNAIL_COLOR_VALUES:
             raise serializers.ValidationError(
-                f"Invalid color '{value}'. Must be one of: {', '.join(valid_colors)}"
+                f"Invalid color '{value}'. Must be one of: {', '.join(SNAIL_COLOR_VALUES)}"
             )
         return value
     
@@ -23,10 +23,9 @@ class RaceSerializer(serializers.ModelSerializer):
         """Validate that second_place is one of the valid snail colors"""
         if value is None:
             return value
-        valid_colors = [color[0] for color in Race.SNAIL_COLORS]
-        if value not in valid_colors:
+        if value not in SNAIL_COLOR_VALUES:
             raise serializers.ValidationError(
-                f"Invalid color '{value}'. Must be one of: {', '.join(valid_colors)}"
+                f"Invalid color '{value}'. Must be one of: {', '.join(SNAIL_COLOR_VALUES)}"
             )
         return value
     
@@ -34,10 +33,9 @@ class RaceSerializer(serializers.ModelSerializer):
         """Validate that last_place is one of the valid snail colors"""
         if value is None:
             return value
-        valid_colors = [color[0] for color in Race.SNAIL_COLORS]
-        if value not in valid_colors:
+        if value not in SNAIL_COLOR_VALUES:
             raise serializers.ValidationError(
-                f"Invalid color '{value}'. Must be one of: {', '.join(valid_colors)}"
+                f"Invalid color '{value}'. Must be one of: {', '.join(SNAIL_COLOR_VALUES)}"
             )
         return value
     
